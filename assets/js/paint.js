@@ -1,43 +1,34 @@
+// display color name function
+// display price function
+//display less opacity function 
+//add event listeners 
+//grab by id 
+
 function configureListeners() {
     var images = document.getElementsByTagName('img');    
 
      for (var i = 0; i < images.length; i++) {        
-        document.getElementById(images[i].id).addEventListener('mouseover', addOpacity, false)        
-        document.getElementById(images[i].id).addEventListener('mouseout', removeOpacity, false)        
+        document.getElementById(images[i].id).addEventListener('mouseover', lessOpacity);
+        document.getElementById(images[i].id).addEventListener('mouseout', normalOpacity);         
+             
     } 
+
+function lessOpacity (event){
+    this.style.opacity="0.5";
+    getProductInfo(event.target.id); 
+}
 }
 
-function addOpacity(event) {
-    if (!this.classList.contains('dim')){
-        this.classList.add('dim')
-    }    
-    getProductInfo(event.target.id);     
+function normalOpacity(){
+    this.style.opacity="1";
 }
 
-function removeOpacity(event) {
-     if (this.classList.contains('dim')){
-        this.classList.remove('dim');
-    }
 
-    let element = document.getElementById('ppg');
-        element.textContent = '';
-        
-    let color = document.getElementById('color');
-        color.textContent = ''; 
-
-    event.preventDefault();    
-}
-
-function changeImage(elementId) {
-    let image = document.getElementById('imgDisplay');
-    image.src = elementId.src;
-}
-
-function getProductInfo(partNumber) {
-    let price;
-    let colorName;  
+function getProductInfo(imgId) {
+    let price= 0;
+    let colorName = 0; 
     
-    switch (partNumber) {
+    switch (imgId) {
         case 'pn1':           
             price = '$19.99'
             colorName = 'Lime Green'
@@ -94,5 +85,4 @@ function getProductInfo(partNumber) {
         let color = document.getElementById('color');
         color.textContent = colorName;
     }
-    
 }
